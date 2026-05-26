@@ -1,8 +1,9 @@
 package com.fruitslot.Game;
 
+import java.security.SecureRandom;
+
 import com.fasterxml.jackson.databind.JsonNode;
 
-import java.util.Random;
 
 public class BonusGame {
 
@@ -16,7 +17,7 @@ public class BonusGame {
      * ----------------------------------------------------------------------------
      * Initialises the bonus game configuration from a JSON file.
      *
-     * Coin values and their selection weights are stored for weighted random
+     * Coin values and their selection weights are stored for weighted SecureRandom
      * selection during bonus gameplay.
      * ============================================================================
      */
@@ -51,7 +52,7 @@ public class BonusGame {
      * @return bonus payout amount
      * ============================================================================
      */
-    public static long play(int totalBet, Random rng) {
+    public static long play(int totalBet, SecureRandom rng) {
 
         int coin = selectCoin(rng);
         int dice = rng.nextInt(diceSides) + 1;
@@ -70,7 +71,7 @@ public class BonusGame {
      *  [2] dice roll result
      * ============================================================================
      */
-    public static int[] playDetailed(int totalBet, Random rng) {
+    public static int[] playDetailed(int totalBet, SecureRandom rng) {
         int coin = selectCoin(rng);
         int dice = rng.nextInt(diceSides) + 1;
         return new int[]{ dice * coin * totalBet, coin, dice };
@@ -79,13 +80,13 @@ public class BonusGame {
     /* ============================================================================
      * selectCoin
      * ----------------------------------------------------------------------------
-     * Performs weighted random selection of a coin value based on configured
+     * Performs weighted SecureRandom selection of a coin value based on configured
      * probability weights.
      *
      * Uses cumulative distribution sampling.
      * ============================================================================
      */
-    private static int selectCoin(Random rng) {
+    private static int selectCoin(SecureRandom rng) {
 
         int roll = rng.nextInt(totalWeight);
         int cumulative = 0;

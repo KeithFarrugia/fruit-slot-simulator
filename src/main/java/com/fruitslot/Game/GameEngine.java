@@ -2,13 +2,13 @@ package com.fruitslot.Game;
 
 import com.fruitslot.Data.*;
 
-import java.util.Random;
+import java.security.SecureRandom;;
 
 public class GameEngine {
 
     private static final int TOTAL_BET = 10;
 
-    private final Random rng;
+    private final SecureRandom rng;
     private final ReelSet reelSet;
     private final Paytable paytable;
 
@@ -20,7 +20,7 @@ public class GameEngine {
      * bonus games.
      * ============================================================================
      */
-    public GameEngine(Random rng, ReelSet reelSet, Paytable paytable) {
+    public GameEngine(SecureRandom rng, ReelSet reelSet, Paytable paytable) {
         this.rng        = rng;
         this.reelSet    = reelSet;
         this.paytable   = paytable;

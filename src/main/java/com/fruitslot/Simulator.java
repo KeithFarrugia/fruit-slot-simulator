@@ -10,9 +10,9 @@ import com.fruitslot.Game.GameEngine;
 import com.fruitslot.Game.Paylines;
 
 import java.io.File;
+import java.security.SecureRandom;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Random;
 
 public class Simulator {
 
@@ -75,7 +75,7 @@ public class Simulator {
         Paytable paytable   = new Paytable(root);
         BonusGame.init(root);
 
-        Random rng          = new Random(42);
+        SecureRandom rng    = new SecureRandom();
         GameEngine engine   = new GameEngine(rng, reelSet, paytable);
 
         long totalWin       = 0, baseWin        = 0, bonusWin = 0;
@@ -190,7 +190,7 @@ public class Simulator {
         double avgBon  = bonusTriggers > 0 ? (double)bonusWin  / bonusTriggers : 0;
         double bonFreq = (double) ROUNDS / Math.max(bonusTriggers, 1);
 
-        System.out.println("\n" + "═".repeat(74));
+        System.out.println("\n" + "=".repeat(74));
 
         System.out.printf(" %-20s : %,18d | Bet/Round: %d%n",
                 "Simulated Rounds", ROUNDS, TOTAL_BET);
@@ -198,12 +198,12 @@ public class Simulator {
         System.out.printf(" %-20s : %,18d | Elapsed:   %.2fs%n",
                 "Total Realized Win", totalWin, elapsed / 1000.0);
 
-        System.out.println("─".repeat(74));
+        System.out.println("-".repeat(74));
 
         System.out.printf(" %-12s | %-16s | %-16s%n",
                 "Core Metric", "Simulated Value", "Expected Value");
 
-        System.out.println("─".repeat(74));
+        System.out.println("-".repeat(74));
 
         printRow("RTP Total" , rtp     * 100, EXP_RTP_TOTAL * 100, "%13.2f%%");
         printRow("RTP Base"  , rtpBase * 100, EXP_RTP_BASE  * 100, "%13.2f%%");
@@ -218,7 +218,7 @@ public class Simulator {
         System.out.printf(" %-12s | %-16s | %-16s%n",
                 "Symbol Line", "Sim Hit Prob", "Exp Hit Prob");
 
-        System.out.println("─".repeat(74));
+        System.out.println("-".repeat(74));
 
         long paylineChecks = (long) ROUNDS * Paylines.count();
 
